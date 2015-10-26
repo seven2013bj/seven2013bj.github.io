@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://seven2013bj.github.io/sitemap.xml 
