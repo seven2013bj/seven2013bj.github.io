@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[宋薇的技术博客]]></title>
-  <link href="http://seven2013bj.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Octopress | 宋薇的技术博客]]></title>
+  <link href="http://seven2013bj.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://seven2013bj.github.io/"/>
   <updated>2015-10-26T16:38:00+08:00</updated>
   <id>http://seven2013bj.github.io/</id>
@@ -98,38 +98,6 @@ $ git commit -am "Some comment here."
 $ git push origin source
 $ rake deploy
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac显示和隐藏文件]]></title>
-    <link href="http://seven2013bj.github.io/blog/2015/10/26/macxian-shi-he-yin-cang-wen-jian/"/>
-    <updated>2015-10-26T14:36:29+08:00</updated>
-    <id>http://seven2013bj.github.io/blog/2015/10/26/macxian-shi-he-yin-cang-wen-jian</id>
-    <content type="html"><![CDATA[<p>Mac OS X操作系统下显示Mac隐藏文件的命令:</p>
-
-<pre><code>defaults write com.apple.finder AppleShowAllFiles -bool true 
-</code></pre>
-
-<p>或</p>
-
-<pre><code>defaults write com.apple.finder AppleShowAllFiles  YES
-</code></pre>
-
-<!--more-->
-
-<p>隐藏Mac隐藏文件的命令:</p>
-
-<pre><code>defaults write com.apple.finder AppleShowAllFiles -bool false
-</code></pre>
-
-<p>或</p>
-
-<pre><code>defaults write com.apple.finder AppleShowAllFiles  NO
-</code></pre>
-
-<p>在终端中输入对应命令后，按住finder鼠标点击右键后点击重启开启即可。</p>
 
 ]]></content>
   </entry>

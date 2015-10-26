@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mac显示和隐藏文件 - 宋薇的技术博客</title>
+  <title>Mac下搭建基于Github的Octopress博客 - 宋薇的技术博客</title>
   <meta name="author" content="宋薇">
 
   
-  <meta name="description" content="Mac OS X操作系统下显示Mac隐藏文件的命令: defaults write com.apple.finder AppleShowAllFiles -bool true 或 defaults write com.apple.finder AppleShowAllFiles YES &hellip;">
+  <meta name="description" content="准备工作： 确保安装了git（mac上基本自带安装了git）和ruby1.9.3，查看安装版本： $ git --version
+git version 2.6.1 $ ruby -v
+ruby 1.9.3p551 (2014-11-13 revision 48407) [x86_64- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://seven2013bj.github.io/blog/2015/10/26/macxian-shi-he-yin-cang-wen-jian/">
+  <link rel="canonical" href="http://seven2013bj.github.io/blog/2015/10/26/macxia-da-jian-ji-yu-githubde-octopressbo-ke/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="宋薇的技术博客" type="application/atom+xml">
@@ -74,7 +76,7 @@ $(document).bind('DOMNodeInserted', function(event) {
   
   <header>
     
-      <h1 class="entry-title">Mac显示和隐藏文件</h1>
+      <h1 class="entry-title">Mac下搭建基于Github的Octopress博客</h1>
     
     
       <p class="meta">
@@ -83,36 +85,93 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 
 
-<time class='entry-date' datetime='2015-10-26T14:36:29+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:36 pm</span></time>
+<time class='entry-date' datetime='2015-10-26T15:39:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:39 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Mac OS X操作系统下显示Mac隐藏文件的命令:</p>
+<div class="entry-content"><p>准备工作：
+  确保安装了git（mac上基本自带安装了git）和ruby1.9.3，查看安装版本：</p>
 
-<pre><code>defaults write com.apple.finder AppleShowAllFiles -bool true 
+<pre><code>$ git --version
+git version 2.6.1
+
+$ ruby -v
+ruby 1.9.3p551 (2014-11-13 revision 48407) [x86_64-darwin15.0.0]
+
+$ gcc -v
+Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/c++/4.2.1
+Apple LLVM version 7.0.0 (clang-700.0.72)
+Target: x86_64-apple-darwin15.0.0
+Thread model: posix
 </code></pre>
 
-<p>或</p>
+<p>从github克隆下Octopress项目文件到本地的octopress目录：</p>
 
-<pre><code>defaults write com.apple.finder AppleShowAllFiles  YES
+<pre><code> $ git clone git://github.com/imathis/octopress.git
 </code></pre>
 
-<!--more-->
+<p>进入Octopress项目根目录：</p>
 
-<p>隐藏Mac隐藏文件的命令:</p>
-
-<pre><code>defaults write com.apple.finder AppleShowAllFiles -bool false
+<pre><code> $ cd octopress
 </code></pre>
 
-<p>或</p>
+<p>安装相关工具包：</p>
 
-<pre><code>defaults write com.apple.finder AppleShowAllFiles  NO
+<pre><code> $ sudo gem install bundler
 </code></pre>
 
-<p>在终端中输入对应命令后，按住finder鼠标点击右键后点击重启开启即可。</p>
+<p>可能出现如下所示错误：
+Gem::RemoteFetcher::FetchError: Errno::ECONNRESET: Connection reset by peer - SSL_connect (https://rubygems.org/gems/rake-10.4.2.gem)
+An error occurred while installing rake (10.4.2), and Bundler cannot continue.
+Make sure that <code>gem install rake -v '10.4.2'</code> succeeds before bundling.
+   需要通过：</p>
+
+<pre><code> $ vim Gemfile
+</code></pre>
+
+<p>source换为https://ruby.taobao.org 再执行：</p>
+
+<pre><code> $ bundle install
+ $ rake install
+</code></pre>
+
+<p>建立username.github.io的gibhub page
+输入以下命令部署博客</p>
+
+<pre><code>$ rake generate
+$ rake deploy
+</code></pre>
+
+<p>博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下</p>
+
+<pre><code>$ git add .
+$ git commit -m 'Initial source commit'
+$ git push origin source
+
+$ git remote -v
+octopress	git://github.com/imathis/octopress.git (fetch)
+octopress	git://github.com/imathis/octopress.git (push)
+origin	git@github.com:seven2013bj/seven2013bj.github.io.git (fetch)
+origin	git@github.com:seven2013bj/seven2013bj.github.io.git (push)
+</code></pre>
+
+<p>部署前可以在本地预览，输入rake preview之后在浏览器输入http://localhost:4000/来访问
+新建博客，文章生成在目录下的source/_posts目录下：</p>
+
+<pre><code>$ rake new_post["myTitle"]
+</code></pre>
+
+<p>写完后部署更新文章到github上</p>
+
+<pre><code>$ rake generate
+$ git add .
+$ git commit -am "Some comment here." 
+$ git push origin source
+$ rake deploy
+</code></pre>
 
 </div>
 
@@ -129,12 +188,12 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 
 
-<time class='entry-date' datetime='2015-10-26T14:36:29+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:36 pm</span></time>
+<time class='entry-date' datetime='2015-10-26T15:39:13+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:39 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mac/'>mac</a>
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
   
 </span>
 
@@ -158,8 +217,8 @@ $(document).bind('DOMNodeInserted', function(event) {
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2015/10/26/macxian-shi-he-yin-cang-wen-jian/" title="Previous Post: Mac显示和隐藏文件">&laquo; Mac显示和隐藏文件</a>
       
-        <a class="basic-alignment right" href="/blog/2015/10/26/macxia-da-jian-ji-yu-githubde-octopressbo-ke/" title="Next Post: Mac下搭建基于Github的Octopress博客">Mac下搭建基于Github的Octopress博客 &raquo;</a>
       
     </p>
   </footer>
